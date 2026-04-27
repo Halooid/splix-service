@@ -1,0 +1,6 @@
+# Generated files
+/gen/
+**/gen/
+
+# Dependencies
+go.sum
