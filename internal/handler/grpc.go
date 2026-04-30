@@ -59,7 +59,7 @@ func (h *SplixHandler) ListConnections(ctx context.Context, req *splixv1.ListCon
 	if err != nil {
 		return nil, err
 	}
-	protoUsers := make([]*splixv1.User, len(users))
+	protoUsers := make([]*splixv1.SplixUser, len(users))
 	for i, u := range users {
 		protoUsers[i] = mapUser(u)
 	}
@@ -192,8 +192,8 @@ func (h *SplixHandler) GetUserExpenses(ctx context.Context, req *splixv1.GetUser
 }
 
 // Helpers
-func mapUser(u db.User) *splixv1.User {
-	return &splixv1.User{
+func mapUser(u db.User) *splixv1.SplixUser {
+	return &splixv1.SplixUser{
 		Id:                  u.ID.String(),
 		Email:               u.Email,
 		Name:                u.Name,
