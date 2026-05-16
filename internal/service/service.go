@@ -28,6 +28,10 @@ func (s *SplixService) CreateUser(ctx context.Context, id uuid.UUID, email, name
 	})
 }
 
+func (s *SplixService) GetUser(ctx context.Context, id uuid.UUID) (db.User, error) {
+	return s.queries.GetUser(ctx, id)
+}
+
 func (s *SplixService) AddConnection(ctx context.Context, userID, connectedUserID uuid.UUID) error {
 	return s.queries.AddConnection(ctx, db.AddConnectionParams{
 		UserID:          userID,

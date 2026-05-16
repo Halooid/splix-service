@@ -35,6 +35,18 @@ func (h *SplixHandler) CreateUser(ctx context.Context, req *splixv1.CreateUserRe
 	return &splixv1.CreateUserResponse{User: mapUser(u)}, nil
 }
 
+func (h *SplixHandler) GetUser(ctx context.Context, req *splixv1.GetUserRequest) (*splixv1.GetUserResponse, error) {
+	id, err := uuid.Parse(req.Id)
+	if err != nil {
+		return nil, fmt.Errorf("invalid user id: %w", err)
+	}
+	u, err := h.service.GetUser(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return &splixv1.GetUserResponse{User: mapUser(u)}, nil
+}
+
 func (h *SplixHandler) AddConnection(ctx context.Context, req *splixv1.AddConnectionRequest) (*splixv1.AddConnectionResponse, error) {
 	claims, ok := auth.GetUser(ctx)
 	if !ok {
